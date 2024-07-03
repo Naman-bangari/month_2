@@ -14,6 +14,24 @@ app.get('/get',(req,res)=>{
     .then(result=>res.json(result))
     .catch(err=>res.json(err));
 })
+app.put('/update/:id', (req, res) => {
+    const { id } = req.params;
+    TodoModel.findById(id)
+        .then(todo => {
+            if (!todo) {
+                return res.status(404).json({ error: 'Todo not found' });
+            }
+            return TodoModel.findByIdAndUpdate(id, { done: !todo.done }, { new: true });
+        })
+        .then(result => res.json(result))
+        .catch(err => res.json(err));
+})
+app.delete('/delete/:id',(req,res)=>{
+    const {id}=req.params;
+    TodoModel.findByIdAndDelete({_id:id})
+    .then(result => res.json(result))
+    .catch(err => res.json(err));
+})
 app.post('/add', (req, res) => {
     const task = req.body.task;
     TodoModel.create({
