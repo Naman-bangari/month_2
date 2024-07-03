@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Create from './Create'
 import axios from 'axios'
 import './Home.css'
-
+import iconImg from './Icon/1.png';
 function Home() {
   const [todos, setTodos] = useState([])
 
@@ -32,7 +32,9 @@ function Home() {
 
   return (
     <div>
-      <h1>Todo List</h1>
+      
+
+      <h1>Todo List <img src={iconImg} alt="Description of the image" style={{ width: '70px', height: '70px' }} /></h1>
       <Create />
       {
         todos.length === 0 ?
